@@ -33,7 +33,7 @@ class _AuthPageState extends State<AuthPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomTextFormField(
-              controller: _passwordController,
+              controller: _emailController,
               labelText: 'メールアドレス',
               obscureText: true,
             ),
