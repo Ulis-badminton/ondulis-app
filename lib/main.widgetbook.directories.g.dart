@@ -12,7 +12,7 @@
 import 'package:ondulis_app/components/atoms/text_field_stories.dart' as _i2;
 import 'package:ondulis_app/components/molecules/customTextFormField_stories.dart'
     as _i3;
-import 'package:ondulis_app/components/organisms/thread_card_stories.dart'
+import 'package:ondulis_app/components/molecules/thread_card_stories.dart'
     as _i4;
 import 'package:widgetbook/widgetbook.dart' as _i1;
 
