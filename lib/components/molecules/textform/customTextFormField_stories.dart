@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
-import 'package:ondulis_app/components/molecules/customTextFormField.dart';
+import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
 
 @widgetbook.UseCase(
   name: 'CustomTextFormField',

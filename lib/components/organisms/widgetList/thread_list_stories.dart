@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ondulis_app/components/organisms/thread_list.dart';
+import 'package:ondulis_app/components/organisms/widgetList/thread_list.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
-import 'package:ondulis_app/components/molecules/thread_card.dart';
+import 'package:ondulis_app/components/molecules/container/thread_card.dart';
 
 List<ThreadCard> threads = [
   ThreadCard(

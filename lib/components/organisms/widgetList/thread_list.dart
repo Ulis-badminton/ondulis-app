@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ondulis_app/components/molecules/thread_card.dart';
+import 'package:ondulis_app/components/molecules/container/thread_card.dart';
 
 class ThreadList extends StatelessWidget {
   final List<ThreadCard> threads;
