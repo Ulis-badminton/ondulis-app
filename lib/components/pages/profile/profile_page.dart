@@ -66,6 +66,9 @@ class ProfileSetupPage extends ConsumerWidget {
                   );
                   // プロフィール設定後の処理
                 }
+                debugPrint('プロフィールを登録しました');
+                debugPrint('ニックネーム: $nickname');
+                debugPrint('プロフィール画像: ${profileImage?.path}');
               },
               child: Text('登録'),
             ),
