@@ -10,6 +10,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:ondulis_app/components/atoms/text_field_stories.dart' as _i2;
+import 'package:ondulis_app/components/molecules/customTextFormField_stories.dart'
+    as _i3;
 import 'package:widgetbook/widgetbook.dart' as _i1;
 
 final directories = <_i1.WidgetbookNode>[
@@ -27,7 +29,19 @@ final directories = <_i1.WidgetbookNode>[
             ),
           )
         ],
-      )
+      ),
+      _i1.WidgetbookFolder(
+        name: 'molecules',
+        children: [
+          _i1.WidgetbookLeafComponent(
+            name: 'CustomTextFormField',
+            useCase: _i1.WidgetbookUseCase(
+              name: 'CustomTextFormField',
+              builder: _i3.customTextField,
+            ),
+          )
+        ],
+      ),
     ],
   )
 ];
