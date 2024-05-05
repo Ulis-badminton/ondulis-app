@@ -1,0 +1,47 @@
+// 省略
+classpath 'com.android.tools.build:gradle:7.4.2'
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.google.gms.google-services' 
+    ext.enableCrashlytics = [null, dev].contains(flavor.name)
+        ? false 
+        : true
+
+// 省略
+
+android {
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    flavorDimensions 'flavor'
+    productFlavors {
+        dev {
+            dimension 'flavor'
+            applicationIdSuffix '.dev'
+            manifestPlaceholders = [appName: '(d)FlutterFire']
+            // google-services.jsonの読み込み設定
+            apply plugin: 'com.google.gms.google-services'
+            googleServices {
+                services {
+                    disableServices = [
+                            "com.google.gms.google-services.AUTH_SERVICE", 
+                            "com.google.gms.google-services.LOCATION_SERVICE"
+                    ]
+                }
+            }
+        }
+        prod {
+            dimension 'flavor'
+            manifestPlaceholders = [appName: 'FlutterFire']
+            apply plugin: 'com.google.gms.google-services'
+        }
+    }
+}
+

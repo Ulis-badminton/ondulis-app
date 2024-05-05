@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "908775029903",
+    "project_id": "ondulis-app-prod",
+    "storage_bucket": "ondulis-app-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908775029903:android:657aa5048ec5164b07c4fa",
+        "android_client_info": {
+          "package_name": "jp.akaushi.ondulis_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS4mS_7c11ubW4aCRysWS_qYLFTr2Zk6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
