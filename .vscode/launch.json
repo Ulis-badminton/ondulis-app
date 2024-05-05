@@ -8,7 +8,7 @@
             "program": "lib/main.dart",
             "args": [
                 "--flavor",
-                "dev",
+                "Debug-dev",
                 "--dart-define=FLAVOR=dev",
                 "--dart-define=BUNDLE_ID=jp.akaushi.ondulis.dev", 
                 "--dart-define=DISPLAY_NAME=(d)FlutterFire"
@@ -21,7 +21,7 @@
             "program": "lib/main.dart",
             "args": [
                 "--flavor",
-                "prod",
+                "Debug-prod",
                 "--dart-define=FLAVOR=prod",
                 "--dart-define=BUNDLE_ID=jp.akaushi.ondulis",
                 "--dart-define=DISPLAY_NAME=FlutterFire"

@@ -7,3 +7,6 @@ WIDGETBOOK_PATH := lib/main.widgetbook.dart
 
 widgetbook:
 	$(FLUTTER_BIN) run -d $(CHROME_DEVICE) -t $(WIDGETBOOK_PATH)
+
+widgetbook_gen:
+	flutter pub run build_runner build --delete-conflicting-outputs

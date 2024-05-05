@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDe0OQOV9urTaiA_mLiYaom0GT-hTdez_M',
-    appId: '1:938953147375:android:34616c578e242e80c0ac1a',
-    messagingSenderId: '938953147375',
-    projectId: 'ondulis-31d0b',
-    storageBucket: 'ondulis-31d0b.appspot.com',
+    apiKey: 'AIzaSyAHwT7xIJ6-uLIx-QqtN7iZA3xEHCTr-M0',
+    appId: '1:142503057564:android:24b931070432f3af0bb559',
+    messagingSenderId: '142503057564',
+    projectId: 'ondulis-app-dev',
+    storageBucket: 'ondulis-app-dev.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAM_EQMawML---9YxrwhQms63af4mtqau0',
-    appId: '1:938953147375:ios:cacb6bf32737e451c0ac1a',
-    messagingSenderId: '938953147375',
-    projectId: 'ondulis-31d0b',
-    storageBucket: 'ondulis-31d0b.appspot.com',
-    iosBundleId: 'ondulis-31d0b.ondulisApp',
+    apiKey: 'AIzaSyCmfN-m54oVRxLd__-u_UrYa1m5yHo5eAU',
+    appId: '1:142503057564:ios:08e2eab689d30bff0bb559',
+    messagingSenderId: '142503057564',
+    projectId: 'ondulis-app-dev',
+    storageBucket: 'ondulis-app-dev.appspot.com',
+    iosBundleId: 'jp.akaushi.ondulis',
   );
+
 }
