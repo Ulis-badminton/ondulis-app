@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:ondulis_app/components/pages/profile/profile_page.dart';
 import 'package:ondulis_app/auth/auth_service.dart';
-import 'package:ondulis_app/components/molecules/customTextFormField.dart';
+import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
 import 'package:simple_logger/simple_logger.dart';
 import 'package:gap/gap.dart';
 
