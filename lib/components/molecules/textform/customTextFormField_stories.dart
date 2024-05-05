@@ -7,10 +7,10 @@ import 'package:ondulis_app/components/molecules/textform/customTextFormField.da
   type: CustomTextFormField,
 )
 CustomTextFormField customTextField(BuildContext context) {
-  final TextEditingController emailController = TextEditingController();
+  // final TextEditingController emailController = TextEditingController();
   return CustomTextFormField(
-    controller: 
-    emailController, 
+    // controller: 
+    // emailController, 
     labelText: 'メールアドレス',
   );
 }
