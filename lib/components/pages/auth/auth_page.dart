@@ -23,7 +23,7 @@ class _AuthPageState extends State<AuthPage> {
       );
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
     } on FirebaseAuthException catch (e) {
       debugPrint(e.toString());
@@ -45,7 +45,7 @@ class _AuthPageState extends State<AuthPage> {
       if (user != null) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const ProfilePage()),
+          MaterialPageRoute(builder: (context) => ProfilePage(user: user)),
         );
       }
     } on FirebaseAuthException catch (e) {
