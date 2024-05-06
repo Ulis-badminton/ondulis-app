@@ -1,132 +1,75 @@
-// auth/auth_page.dart
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
 import 'package:ondulis_app/components/pages/posts/home.dart';
 import 'package:ondulis_app/components/pages/profile/profile_page.dart';
-import 'package:ondulis_app/auth/auth_service.dart';
-import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
-import 'package:gap/gap.dart';
+
 class AuthPage extends StatefulWidget {
   @override
   _AuthPageState createState() => _AuthPageState();
 }
 
 class _AuthPageState extends State<AuthPage> {
+  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Auth Page'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomTextFormField(
-              controller: _emailController,
-              labelText: 'メールアドレス',
-              obscureText: false,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'メールアドレスを入力してください';
-                }
-                return null;
-              },
-            ),
-            const Gap(16.0),
-            CustomTextFormField(
-              controller: _passwordController,
-              labelText: 'パスワード',
-              obscureText: true,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'パスワードを入力してください';
-                }
-                // 英数字以外はエラー
-                if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
-                  return '英数字のみ入力可能です';
-                }
-                return null;
-              },
-            ),
-            const Gap(16.0),
-            ElevatedButton(
-              onPressed: () {
-                if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('メールアドレスとパスワードを入力してください'),
-                    ),
-                  );
-                  return;
-                }
-                AuthService().signInEmail(_emailController.text, _passwordController.text);
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => const HomePage()));
-              },
-              child: const Text('ログイン'),
-            ),
-            const Gap(16.0),
-            ElevatedButton(
-              onPressed: () {
-                if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('メールアドレスとパスワードを入力してください'),
-                    ),
-                  );
-                  return;
-                }
-                AuthService().createUserEmail(_emailController.text, _passwordController.text)
-                .then((_) {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileSetupPage()));
-                })
-                .catchError((error) {
-                  if (error.code == 'email-already-in-use') {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('そのメールアドレスはすでに登録されています'),
-                      ),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('エラーが発生しました: ${error.message}'),
-                      ),
-                    );
-                  }
-                });
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => ProfileSetupPage()));
-              },
-              child: const Text('アカウント作成'),
-            ),
-            const Gap(16.0),
-            ElevatedButton(
-              onPressed: () {
-                if (_emailController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('メールアドレスを入力してください'),
-                    ),
-                  );
-                  return;
-                }
-                AuthService().sendPasswordResetEmail();
-                // ここでメールを送信したことを知らせるSnackBarを表示
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('パスワード再発行メールを送信しました'),
-                  ),
-                );
-              },
-              child: const Text('パスワード再発行'),
-            ),
-          ],
-        ),
+  Future<void> _signIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.toString());
+      if (e.code == '') {
+        _showSnackBar('ユーザーが登録されていません');
+      } else if (e.code == 'wrong-password') {
+        _showSnackBar('パスワードが間違っています');
+      } 
+    }
+  }
+
+  Future<void> _createAccount() async {
+    try {
+      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      final user = userCredential.user;
+      if (user != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.toString());
+      if (e.code == 'email-already-in-use') {
+        _showSnackBar('このメールアドレスはすでに登録されています');
+      }
+    }
+  }
+
+  Future<void> _resetPassword() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text);
+      _showSnackBar('パスワード再設定用のメールを送信しました');
+    } catch (e) {
+      debugPrint(e.toString());
+      _showSnackBar('メールアドレスが間違っています');
+    }
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
       ),
     );
   }
@@ -136,5 +79,58 @@ class _AuthPageState extends State<AuthPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('ログイン/新規登録'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              CustomTextFormField(
+                labelText: 'メールアドレス',
+                controller: _emailController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'メールアドレスを入力してください';
+                  }
+                  return null;
+                },
+              ),
+              CustomTextFormField(
+                labelText: 'パスワード',
+                controller: _passwordController,
+                obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'パスワードを入力してください';
+                  }
+                  return null;
+                },
+              ),
+              const Gap(16.0),
+              ElevatedButton(
+                onPressed: _signIn,
+                child: const Text('ログイン'),
+              ),
+              ElevatedButton(
+                onPressed: _createAccount,
+                child: const Text('アカウント作成'),
+              ),
+              TextButton(
+                onPressed: _resetPassword,
+                child: const Text('パスワードを忘れた場合'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
