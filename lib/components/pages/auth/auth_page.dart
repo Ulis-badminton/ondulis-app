@@ -27,7 +27,7 @@ class _AuthPageState extends State<AuthPage> {
       );
     } on FirebaseAuthException catch (e) {
       debugPrint(e.toString());
-      if (e.code == '') {
+      if (e.code == 'user-not-found') {
         _showSnackBar('ユーザーが登録されていません');
       } else if (e.code == 'wrong-password') {
         _showSnackBar('パスワードが間違っています');
