@@ -1,5 +1,6 @@
 // auth/auth_page.dart
 import 'package:flutter/material.dart';
+import 'package:ondulis_app/components/pages/posts/home.dart';
 import 'package:ondulis_app/components/pages/profile/profile_page.dart';
 import 'package:ondulis_app/auth/auth_service.dart';
 import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
@@ -27,7 +28,7 @@ class _AuthPageState extends State<AuthPage> {
             CustomTextFormField(
               controller: _emailController,
               labelText: 'メールアドレス',
-              obscureText: true,
+              obscureText: false,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'メールアドレスを入力してください';
@@ -62,9 +63,9 @@ class _AuthPageState extends State<AuthPage> {
                   );
                   return;
                 }
-                AuthService().signInWithEmailAndPassword(context);
+                AuthService().signInEmail(_emailController.text, _passwordController.text);
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => ProfileSetupPage()));
+                    .push(MaterialPageRoute(builder: (context) => const HomePage()));
               },
               child: const Text('ログイン'),
             ),
@@ -79,7 +80,25 @@ class _AuthPageState extends State<AuthPage> {
                   );
                   return;
                 }
-                AuthService().createUserWithEmailAndPassword(context);
+                AuthService().createUserEmail(_emailController.text, _passwordController.text)
+                .then((_) {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileSetupPage()));
+                })
+                .catchError((error) {
+                  if (error.code == 'email-already-in-use') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('そのメールアドレスはすでに登録されています'),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('エラーが発生しました: ${error.message}'),
+                      ),
+                    );
+                  }
+                });
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => ProfileSetupPage()));
               },

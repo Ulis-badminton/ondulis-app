@@ -1,40 +1,64 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ondulis_app/auth/auth_error.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> signInWithEmailAndPassword(BuildContext context) async {
+    Future<FirebaseAuthResultStatus> signInEmail(
+      String email, String password) async {
+    FirebaseAuthResultStatus result;
     try {
-      final User? user = (await _auth.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      ))
-          .user;
-      if (user != null) {
-        debugPrint('ログインしました ${user.email} , ${user.uid}');
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: _emailController.text, password: _passwordController.text);
+      debugPrint('succeed');
+      if (userCredential.user! != null) {
+        result = FirebaseAuthResultStatus.Successful;
+      } else {
+        result = FirebaseAuthResultStatus.Undefined;
       }
-    } catch (e) {
-      debugPrint('$e');
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+      result = FirebaseAuthExceptionHandler.handleException(e);
     }
+    return result;
   }
 
-  Future<void> createUserWithEmailAndPassword(BuildContext context) async {
+  Future<FirebaseAuthResultStatus> createUserEmail(
+      String email, String password) async {
+    FirebaseAuthResultStatus result;
     try {
-      final User? user = (await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      ))
-          .user;
-      if (user != null) {
-        debugPrint('アカウントを作成しました ${user.email} , ${user.uid}');
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+          email: _emailController.text, password: _passwordController.text);
+      debugPrint('succeed');
+      if (userCredential.user! != null) {
+        result = FirebaseAuthResultStatus.Successful;
+      } else {
+        result = FirebaseAuthResultStatus.Undefined;
       }
-    } catch (e) {
-      debugPrint('$e');
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+      result = FirebaseAuthExceptionHandler.handleException(e);
     }
+    return result;
   }
+
+  // Future<void> createUserWithEmailAndPassword(BuildContext context) async {
+  //   try {
+  //     final User? user = (await _auth.createUserWithEmailAndPassword(
+  //       email: _emailController.text,
+  //       password: _passwordController.text,
+  //     ))
+  //         .user;
+  //     if (user != null) {
+  //       debugPrint('アカウントを作成しました ${user.email} , ${user.uid}');
+  //     }
+  //   } catch (e) {
+  //     debugPrint('$e');
+  //   }
+  // }
 
   Future<void> sendPasswordResetEmail() async {
     try {
