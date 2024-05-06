@@ -1,6 +1,8 @@
 // main.dart
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:ondulis_app/components/pages/posts/home.dart';
 import 'firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Riverpodのインポート
 import 'components/pages/auth/auth_page.dart';
@@ -18,7 +20,6 @@ void main() async {
   );
 }
 
-// 認証とプロフィール設定ができたら、ここでログイン済みのユーザーの画面遷移の管理をする
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AuthPage(),
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+          if (snapshot.hasData) {
+            return HomePage();
+          }
+          return AuthPage();
+        },
+      ),
     );
   }
 }
