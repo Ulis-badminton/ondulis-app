@@ -13,9 +13,6 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'ホーム',
-        onBackPressed: () {
-          Navigator.of(context).pop();
-        },
       ),
       body: Center(
         child: userStream.when(
