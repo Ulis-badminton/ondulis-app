@@ -18,6 +18,7 @@ void main() async {
   );
 }
 
+// 認証とプロフィール設定ができたら、ここでログイン済みのユーザーの画面遷移の管理をする
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

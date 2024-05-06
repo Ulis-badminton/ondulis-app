@@ -7,7 +7,7 @@ class FooterWithButtons extends StatelessWidget {
   final VoidCallback rightButtonOnPress;
   final Color borderColor;
 
-  FooterWithButtons({
+  const FooterWithButtons({super.key, 
     required this.leftButtonText,
     required this.leftButtonOnPress,
     required this.rightButtonText,
