@@ -25,4 +25,27 @@ class DataService {
 
     await db.collection('users').doc(authId).set(newUser.toJson());
   }
+
+  // データベースからUserのデータを削除
+  Future<void> deleteUser() async {
+    final authId = auth.currentUser!.uid;
+    await db.collection('users').doc(authId).delete();
+  }
+
+  // データベースのUserのデータを更新
+  Future<void> updateUser(String displayName, String photoURL) async {
+    final authId = auth.currentUser!.uid;
+    final user = await db.collection('users').doc(authId).get();
+    final data = user.data()!;
+
+    final updatedUser = UserModel(
+      email: data['email'],
+      authId: data['authId'],
+      displayName: displayName,
+      profileImageURL: photoURL,
+      createdAt: data['createdAt'].toDate(),
+    );
+
+    await db.collection('users').doc(authId).set(updatedUser.toJson());
+  }
 }

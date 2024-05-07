@@ -4,9 +4,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ondulis_app/repository/user_provider.dart';
 
 // profileImagePathProviderの初期値はcurrentUserのphotoURL
-final profileImagePathProvider = StateProvider<String>((ref) => FirebaseAuth.instance.currentUser?.photoURL ?? '');
+final profileImagePathProvider = StateProvider<String>((ref) => '');
 
 class CustomImagePicker extends ConsumerWidget {
   const CustomImagePicker({super.key});
@@ -14,6 +15,12 @@ class CustomImagePicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imagePath = ref.watch(profileImagePathProvider);
+
+    final user = ref.watch(userProvider).value;
+
+    if (user != null && imagePath.isEmpty) {
+      ref.read(profileImagePathProvider.notifier).state = user.profileImageURL;
+    }
 
     return InkWell(
       onTap: () async {

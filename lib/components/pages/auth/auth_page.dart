@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
 import 'package:ondulis_app/components/organisms/header/custom_appbar.dart';
-import 'package:ondulis_app/components/pages/posts/home.dart';
+import 'package:ondulis_app/components/pages/home.dart';
 import 'package:ondulis_app/components/pages/profile/profile_page.dart';
 import 'package:ondulis_app/repository/auth_service.dart';
 
@@ -82,6 +83,7 @@ class AuthPage extends ConsumerWidget{
                     }
                   }
                   debugPrint('ログインが完了しました');
+                  debugPrint('${FirebaseAuth.instance.currentUser?.uid}');
                 },
                 child: const Text('ログイン'),
               ),
