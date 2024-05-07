@@ -6,25 +6,26 @@ import 'package:ondulis_app/components/atoms/imagePicker/custom_image_picker.dar
 import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
 import 'package:ondulis_app/components/pages/home.dart';
 import 'package:ondulis_app/repository/data_service.dart';
+import 'package:ondulis_app/repository/user_provider.dart';
 
 final _auth = FirebaseAuth.instance;
 
+class ProfileChangePage extends ConsumerWidget{
 
-class ProfilePage extends ConsumerWidget{
-
-    const ProfilePage({Key? key}) : super(key: key);
+    const ProfileChangePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     
-    final displayNameController = TextEditingController();
+    // final displayNameController = TextEditingController();
     final profileImagePath = ref.watch(profileImagePathProvider);
 
     final dataService = ref.read(dataServiceProvider.notifier).state;
+    final displayNameController = TextEditingController(text: ref.watch(userProvider).value?.displayName ?? '');
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('プロフィール登録'),
+      title: const Text('プロフィール変更'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -33,8 +34,8 @@ class ProfilePage extends ConsumerWidget{
             const CustomImagePicker(),
             const Gap(20),
             CustomTextFormField(
-              labelText: 'アカウント名',
               controller: displayNameController,
+              labelText: 'アカウント名',
             ),
             const Gap(20),
             ElevatedButton(
@@ -72,7 +73,7 @@ class ProfilePage extends ConsumerWidget{
                   }
                 }
               },
-              child: const Text('登録する'),
+              child: const Text('変更する'),
             ),
           ]
         )

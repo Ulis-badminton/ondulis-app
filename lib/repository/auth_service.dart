@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ondulis_app/repository/data_service.dart';
 
 class AuthService {
   final _auth = FirebaseAuth.instance;
@@ -34,6 +35,11 @@ class AuthService {
   }
 
   Future<void> signOut() async {
+    // Firestoreの該当ユーザーのドキュメントを削除
     await _auth.signOut();
+  }
+
+  String? getUid() {
+    return _auth.currentUser?.uid;
   }
 }

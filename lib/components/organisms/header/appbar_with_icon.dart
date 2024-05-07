@@ -28,13 +28,12 @@ class AppBarWithIcon extends StatelessWidget implements PreferredSizeWidget {
             )
           : null, // コールバックが設定されていない場合は何も表示しない
       actions: [
-        GestureDetector(
+        InkWell(
           onTap: onIconPressed,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              icon: Image.asset(imagePath),
-              onPressed: () {}, // この部分は無視される
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(imagePath),
             ),
           ),
         ),
