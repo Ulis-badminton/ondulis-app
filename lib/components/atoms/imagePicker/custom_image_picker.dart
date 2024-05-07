@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,11 +14,12 @@ class CustomImagePicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imagePath = ref.watch(profileImagePathProvider);
-
     final user = ref.watch(userProvider).value;
 
-    if (user != null && imagePath.isEmpty) {
-      ref.read(profileImagePathProvider.notifier).state = user.profileImageURL;
+  if (user != null && imagePath.isEmpty) {
+      Future(() {
+        ref.read(profileImagePathProvider.notifier).state = user.profileImageURL;
+      });
     }
 
     return InkWell(
@@ -28,10 +28,12 @@ class CustomImagePicker extends ConsumerWidget {
             await ImagePicker().pickImage(source: ImageSource.gallery);
         if (pickedFile != null) {
           final fileName = DateTime.now().millisecondsSinceEpoch.toString();
-          final reference = FirebaseStorage.instance.ref().child('profileImages/$fileName');
+          final reference =
+              FirebaseStorage.instance.ref().child('profileImages/$fileName');
           await reference.putFile(File(pickedFile.path));
           final imageUrl = await reference.getDownloadURL();
-          ref.read(profileImagePathProvider.notifier).state = imageUrl;
+          Future(() =>
+              ref.read(profileImagePathProvider.notifier).state = imageUrl);
         }
       },
       child: CircleAvatar(

@@ -4,9 +4,9 @@ import 'package:ondulis_app/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-final dataServiceProvider = StateProvider<DataService>((ref) => DataService());
+final userServiceProvider = StateProvider<UserService>((ref) => UserService());
 // データベースへの書き込みを行うクラス
-class DataService {
+class UserService {
   // データベースの参照を取得
   final db = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance;

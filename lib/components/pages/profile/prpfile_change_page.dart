@@ -2,11 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:ondulis_app/components/atoms/button/open_url_button.dart';
 import 'package:ondulis_app/components/atoms/imagePicker/custom_image_picker.dart';
 import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
 import 'package:ondulis_app/components/pages/home.dart';
-import 'package:ondulis_app/repository/data_service.dart';
+import 'package:ondulis_app/repository/user_service.dart';
 import 'package:ondulis_app/repository/user_provider.dart';
+
 
 final _auth = FirebaseAuth.instance;
 
@@ -20,7 +22,7 @@ class ProfileChangePage extends ConsumerWidget{
     // final displayNameController = TextEditingController();
     final profileImagePath = ref.watch(profileImagePathProvider);
 
-    final dataService = ref.read(dataServiceProvider.notifier).state;
+    final dataService = ref.read(userServiceProvider.notifier).state;
     final displayNameController = TextEditingController(text: ref.watch(userProvider).value?.displayName ?? '');
 
     return Scaffold(
@@ -74,6 +76,11 @@ class ProfileChangePage extends ConsumerWidget{
                 }
               },
               child: const Text('変更する'),
+            ),
+            const Gap(20),
+            const OpenUrlButton(
+              urlString: 'https://forms.gle/gfNEdPDNGL6fFYpL6',
+              text: Text('要望はこちらへ')
             ),
           ]
         )

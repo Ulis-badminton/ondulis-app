@@ -9,8 +9,8 @@ part 'mood.g.dart'; // 先頭の文字をファイル名と同じ名前にする
 class Mood with _$Mood {
   const factory Mood({
     required String auth_id,
-    required int mood,
-    required DateTime date,
+    required int mood, // 0: bad, 1: normal, 2: good
+    required DateTime date, // 今日の日付
     @TimestampConverter() DateTime? createdAt,
   }) = _Mood;
 
