@@ -1,70 +1,89 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:ondulis_app/components/atoms/imagePicker/custom_image_picker.dart';
 import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
 import 'package:ondulis_app/components/pages/posts/home.dart';
+import 'package:ondulis_app/repository/data_service.dart';
 
-class ProfilePage extends StatefulWidget {
-  final User user;
+final _auth = FirebaseAuth.instance;
 
-  const ProfilePage({super.key, required this.user});
 
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
+class ProfilePage extends ConsumerWidget{
 
-class _ProfilePageState extends State<ProfilePage> {
-  final _displayNameController = TextEditingController();
-
-  Future<void> _saveProfile() async {
-    final displayName = _displayNameController.text.trim();
-    if (displayName.isNotEmpty) {
-      final userRef = FirebaseFirestore.instance.collection('users').doc(widget.user.uid);
-      final now = DateTime.now();
-      await userRef.set({
-        'email': widget.user.email,
-        'displayName': displayName,
-        'auth_id' : widget.user.uid,
-        'created_at': now,
-      });
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
-    }
-  }
+    const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  void dispose() {
-    _displayNameController.dispose();
-    super.dispose();
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    
+    final displayNameController = TextEditingController();
+    final profileImagePath = ref.watch(profileImagePathProvider);
 
-  @override
-  Widget build(BuildContext context) {
+    final dataService = ref.read(dataServiceProvider.notifier).state;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('プロフィール設定'),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              _auth.signOut();
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
+        title: const Text('プロフィール'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('メールアドレス: ${widget.user.email}'),
-            const Gap(16.0),
+            const CustomImagePicker(),
+            const Gap(20),
             CustomTextFormField(
-              labelText: 'ユーザー名',
-              controller: _displayNameController, 
+              labelText: 'アカウント名',
+              controller: displayNameController,
             ),
-            const Gap(16.0),
+            const Gap(20),
             ElevatedButton(
-              onPressed: _saveProfile,
-              child: const Text('プロフィールを保存'),
+              onPressed: () async {
+                final userId = _auth.currentUser?.uid;
+                if (userId != null) {
+                  final email = _auth.currentUser?.email ?? '';
+                  final displayNameText = displayNameController.text;
+                  final photoUrl = profileImagePath;
+
+                  if (displayNameText.isNotEmpty && photoUrl.isNotEmpty) {
+                    try {
+                      await dataService.addUser(email, displayNameText, photoUrl);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HomePage()),
+                        );
+                    } catch (e) {
+                      debugPrint('Error adding user: $e');
+                    }
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('入力エラー'),
+                        content: const Text('アカウント名と写真は必須です'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                }
+              },
+              child: const Text('登録する'),
             ),
-          ],
-        ),
+          ]
+        )
       ),
     );
   }

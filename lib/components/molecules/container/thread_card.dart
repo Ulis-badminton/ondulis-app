@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class ThreadCard extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final String profileImagePath;
   final VoidCallback onPress;
   final Color iconColor;
   final Color borderColor;
 
-  ThreadCard({
+  const ThreadCard({super.key, 
     required this.title,
-    required this.icon,
+    required this.profileImagePath,
     required this.onPress,
     this.iconColor = Colors.black,
     this.borderColor = Colors.grey,
@@ -20,7 +20,7 @@ class ThreadCard extends StatelessWidget {
     return InkWell(
       onTap: onPress,
       child: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           border: Border.all(color: borderColor),
           borderRadius: BorderRadius.circular(12.0),
@@ -29,15 +29,12 @@ class ThreadCard extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundColor: iconColor,
-              child: Icon(
-                icon,
-                color: Colors.white,
+              child: Image.network(profileImagePath)
               ),
-            ),
-            SizedBox(width: 16.0),
+            const SizedBox(width: 16.0),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.bold,
               ),

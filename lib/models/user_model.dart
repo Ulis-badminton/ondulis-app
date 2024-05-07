@@ -1,25 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ondulis_app/models/timestamp.dart';
 
-class UserModel {
-  final String auth_id;
-  final DateTime create_at;
-  final String displayName;
-  final String email;
+part 'user_model.freezed.dart'; // 先頭の文字をファイル名と同じ名前にする
+part 'user_model.g.dart'; // 先頭の文字をファイル名と同じ名前にする
 
-  UserModel({
-    required this.auth_id,
-    required this.create_at,
-    required this.displayName,
-    required this.email,
-  });
+@freezed
+class UserModel with _$UserModel {
+  const factory UserModel({
+    required String email,
+    required String authId,
+    required String displayName,
+    required String profileImageURL,
+    @TimestampConverter() DateTime? createdAt,
+  }) = _UserModel;
 
-  factory UserModel.fromFirestore(DocumentSnapshot doc) {
-    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    return UserModel(
-      auth_id: data['auth_id'] ?? '',
-      create_at: data['created_at'].toDate(),
-      displayName: data['displayName'] ?? '',
-      email: data['email'] ?? '',
-    );
-  }
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 }
