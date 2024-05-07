@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ondulis_app/repository/data_service.dart';
 
 class AuthService {
   final _auth = FirebaseAuth.instance;

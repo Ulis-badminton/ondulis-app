@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:ondulis_app/components/organisms/header/appbar_with_icon.dart';
-import 'package:ondulis_app/components/pages/profile/profile_page.dart';
 import 'package:ondulis_app/components/pages/profile/prpfile_change_page.dart';
 import 'package:ondulis_app/repository/user_provider.dart';
 

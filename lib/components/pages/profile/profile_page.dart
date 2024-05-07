@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:ondulis_app/components/atoms/imagePicker/custom_image_picker.dart';
 import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
 import 'package:ondulis_app/components/pages/home.dart';
-import 'package:ondulis_app/repository/data_service.dart';
+import 'package:ondulis_app/repository/user_service.dart';
 
 final _auth = FirebaseAuth.instance;
 
@@ -20,7 +20,7 @@ class ProfilePage extends ConsumerWidget{
     final displayNameController = TextEditingController();
     final profileImagePath = ref.watch(profileImagePathProvider);
 
-    final dataService = ref.read(dataServiceProvider.notifier).state;
+    final dataService = ref.read(userServiceProvider.notifier).state;
 
     return Scaffold(
       appBar: AppBar(
