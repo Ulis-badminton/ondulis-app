@@ -48,4 +48,18 @@ class UserService {
 
     await db.collection('users').doc(authId).set(updatedUser.toJson());
   }
+
+  // 指定したauthIDのユーザー情報を取得
+  Future<UserModel> getUser(String authId) async {
+    final user = await db.collection('users').doc(authId).get();
+    final data = user.data()!;
+
+    return UserModel(
+      email: data['email'],
+      authId: data['authId'],
+      displayName: data['displayName'],
+      profileImageURL: data['profileImageURL'],
+      createdAt: data['createdAt'].toDate(),
+    );
+  }
 }

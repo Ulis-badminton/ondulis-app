@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
+import 'package:ondulis_app/components/molecules/container/thread_card.dart';
 import 'package:ondulis_app/components/organisms/header/appbar_with_icon.dart';
+import 'package:ondulis_app/components/pages/home.dart';
 import 'package:ondulis_app/components/pages/profile/prpfile_change_page.dart';
 import 'package:ondulis_app/repository/mood_provider.dart';
 import 'package:ondulis_app/repository/user_provider.dart';
@@ -11,21 +12,17 @@ class TimeLinePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     final user = ref.watch(userProvider).value;
-    // final authId = ref.watch(userProvider).value?.authId;
-    final userMood = ref.watch(moodProvider).value;
-    final mood = userMood?.mood ?? 0;
-    final comment = userMood?.comment ?? '';
+    final todayMoods = ref.watch(todayMoodsProvider).value;
 
-    debugPrint('user: $user.displayName');
+    debugPrint('todayMoodsですよ: $todayMoods');
+    debugPrint('user: ${user?.displayName}');
 
     return Scaffold(
       appBar: AppBarWithIcon(
         title: 'タイムライン',
         imagePath: user?.profileImageURL ?? '',
         onIconPressed: () {
-          // ProfilePageに遷移する
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const ProfileChangePage(),
@@ -33,22 +30,26 @@ class TimeLinePage extends ConsumerWidget {
           );
         },
         onBackPressed: () {
-            Navigator.pop(context);
-          },
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+            ),
+          );
+        },
       ),
-      // ログインしているユーザーの情報を表示する
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('今日の気分'),
-            const Gap(20),
-            Text('今日の気分は$moodです'),
-            const Gap(20),
-            Text('コメント: $comment')
-          ],
-        ),
-      )
+      body: todayMoods == null
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: todayMoods.length,
+              itemBuilder: (context, index) {
+                final mood = todayMoods[index];
+                return ThreadCard(
+                  authId: mood.auth_id,
+                  mood: mood.mood,
+                  comment: mood.comment ?? '',
+                );
+              },
+            ),
     );
   }
 }

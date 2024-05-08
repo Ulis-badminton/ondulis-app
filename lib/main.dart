@@ -13,7 +13,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    // ProviderScopeでアプリをラップする
     const ProviderScope(
       child: MyApp(),
     ),
