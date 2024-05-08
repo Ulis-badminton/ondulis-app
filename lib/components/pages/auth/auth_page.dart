@@ -76,17 +76,38 @@ class AuthPage extends ConsumerWidget{
                       }
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('ユーザーが見つかりませんでした'),
-                          ),
-                        );
+                        showDialog(context: context, builder: (context) {
+                          return AlertDialog(
+                            title: const Text('ユーザーが見つかりません'),
+                            content: const Text('新規登録してください'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const ProfilePage()),
+                                  );
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        });
                       } else if (e.code == 'wrong-password') {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('パスワードが間違っています'),
-                          ),
-                        );
+                        showDialog(context: context, builder: (context) {
+                          return AlertDialog(
+                            title: const Text('パスワードが違います'),
+                            content: const Text('再度入力してください'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        });
                       }
                     }
                   }
@@ -108,11 +129,20 @@ class AuthPage extends ConsumerWidget{
                     );
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'email-already-in-use') {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('このメールアドレスはすでに登録されています'),
-                          ),
-                        );
+                        showDialog(context: context, builder: (context) {
+                          return AlertDialog(
+                            title: const Text('メールアドレスが使われています'),
+                            content: const Text('新しいメールアドレスを入力してください'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        });
                       }
                     }
                   }
@@ -125,17 +155,35 @@ class AuthPage extends ConsumerWidget{
                   if (_formKey.currentState!.validate()) {
                     try {
                       await AuthService().resetPassword(newUserEmail.text);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('パスワード再設定用のメールを送信しました'),
-                        ),
-                      );
+                      showDialog(context: context, builder: (context) {
+                        return AlertDialog(
+                          title: const Text('パスワードリセット'),
+                          content: const Text('メールを送信しました'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      });
                     } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('メールアドレスが間違っています'),
-                        ),
-                      );
+                      showDialog(context: context, builder: (context) {
+                        return AlertDialog(
+                          title: const Text('エラー'),
+                          content: const Text('メールアドレスを確認してください'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      });
                     }
                   }
                 },
