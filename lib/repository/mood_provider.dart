@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ondulis_app/models/mood.dart';
 
-final userProvider = StreamProvider<Mood?>((ref) {
+final moodProvider = StreamProvider<Mood?>((ref) {
   final auth = FirebaseAuth.instance;
   final collection = FirebaseFirestore.instance.collection('mood');
   

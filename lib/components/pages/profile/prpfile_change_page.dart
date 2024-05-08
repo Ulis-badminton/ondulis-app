@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:ondulis_app/components/atoms/button/open_url_button.dart';
 import 'package:ondulis_app/components/atoms/imagePicker/custom_image_picker.dart';
 import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
-import 'package:ondulis_app/components/pages/home.dart';
 import 'package:ondulis_app/repository/user_service.dart';
 import 'package:ondulis_app/repository/user_provider.dart';
 
@@ -51,10 +50,7 @@ class ProfileChangePage extends ConsumerWidget{
                   if (displayNameText.isNotEmpty && photoUrl.isNotEmpty) {
                     try {
                       await dataService.addUser(email, displayNameText, photoUrl);
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const HomePage()),
-                        );
+                        Navigator.pop(context);
                     } catch (e) {
                       debugPrint('Error adding user: $e');
                     }

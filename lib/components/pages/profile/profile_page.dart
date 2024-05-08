@@ -50,7 +50,7 @@ class ProfilePage extends ConsumerWidget{
                       await dataService.addUser(email, displayNameText, photoUrl);
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => const HomePage()),
+                          MaterialPageRoute(builder: (context) => HomePage()),
                         );
                     } catch (e) {
                       debugPrint('Error adding user: $e');

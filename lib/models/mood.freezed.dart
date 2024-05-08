@@ -21,10 +21,10 @@ Mood _$MoodFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Mood {
   String get auth_id => throw _privateConstructorUsedError;
-  int get mood => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  int get mood =>
+      throw _privateConstructorUsedError; // 0: bad, 1: normal, 2: good
+  String? get comment => throw _privateConstructorUsedError;
+  int get date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,11 +36,7 @@ abstract class $MoodCopyWith<$Res> {
   factory $MoodCopyWith(Mood value, $Res Function(Mood) then) =
       _$MoodCopyWithImpl<$Res, Mood>;
   @useResult
-  $Res call(
-      {String auth_id,
-      int mood,
-      DateTime date,
-      @TimestampConverter() DateTime? createdAt});
+  $Res call({String auth_id, int mood, String? comment, int date});
 }
 
 /// @nodoc
@@ -58,8 +54,8 @@ class _$MoodCopyWithImpl<$Res, $Val extends Mood>
   $Res call({
     Object? auth_id = null,
     Object? mood = null,
+    Object? comment = freezed,
     Object? date = null,
-    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       auth_id: null == auth_id
@@ -70,14 +66,14 @@ class _$MoodCopyWithImpl<$Res, $Val extends Mood>
           ? _value.mood
           : mood // ignore: cast_nullable_to_non_nullable
               as int,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as int,
     ) as $Val);
   }
 }
@@ -89,11 +85,7 @@ abstract class _$$MoodImplCopyWith<$Res> implements $MoodCopyWith<$Res> {
       __$$MoodImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String auth_id,
-      int mood,
-      DateTime date,
-      @TimestampConverter() DateTime? createdAt});
+  $Res call({String auth_id, int mood, String? comment, int date});
 }
 
 /// @nodoc
@@ -108,8 +100,8 @@ class __$$MoodImplCopyWithImpl<$Res>
   $Res call({
     Object? auth_id = null,
     Object? mood = null,
+    Object? comment = freezed,
     Object? date = null,
-    Object? createdAt = freezed,
   }) {
     return _then(_$MoodImpl(
       auth_id: null == auth_id
@@ -120,14 +112,14 @@ class __$$MoodImplCopyWithImpl<$Res>
           ? _value.mood
           : mood // ignore: cast_nullable_to_non_nullable
               as int,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as int,
     ));
   }
 }
@@ -138,8 +130,8 @@ class _$MoodImpl implements _Mood {
   const _$MoodImpl(
       {required this.auth_id,
       required this.mood,
-      required this.date,
-      @TimestampConverter() this.createdAt});
+      this.comment,
+      required this.date});
 
   factory _$MoodImpl.fromJson(Map<String, dynamic> json) =>
       _$$MoodImplFromJson(json);
@@ -148,15 +140,15 @@ class _$MoodImpl implements _Mood {
   final String auth_id;
   @override
   final int mood;
+// 0: bad, 1: normal, 2: good
   @override
-  final DateTime date;
+  final String? comment;
   @override
-  @TimestampConverter()
-  final DateTime? createdAt;
+  final int date;
 
   @override
   String toString() {
-    return 'Mood(auth_id: $auth_id, mood: $mood, date: $date, createdAt: $createdAt)';
+    return 'Mood(auth_id: $auth_id, mood: $mood, comment: $comment, date: $date)';
   }
 
   @override
@@ -166,14 +158,13 @@ class _$MoodImpl implements _Mood {
             other is _$MoodImpl &&
             (identical(other.auth_id, auth_id) || other.auth_id == auth_id) &&
             (identical(other.mood, mood) || other.mood == mood) &&
-            (identical(other.date, date) || other.date == date) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.date, date) || other.date == date));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, auth_id, mood, date, createdAt);
+  int get hashCode => Object.hash(runtimeType, auth_id, mood, comment, date);
 
   @JsonKey(ignore: true)
   @override
@@ -193,8 +184,8 @@ abstract class _Mood implements Mood {
   const factory _Mood(
       {required final String auth_id,
       required final int mood,
-      required final DateTime date,
-      @TimestampConverter() final DateTime? createdAt}) = _$MoodImpl;
+      final String? comment,
+      required final int date}) = _$MoodImpl;
 
   factory _Mood.fromJson(Map<String, dynamic> json) = _$MoodImpl.fromJson;
 
@@ -202,11 +193,10 @@ abstract class _Mood implements Mood {
   String get auth_id;
   @override
   int get mood;
+  @override // 0: bad, 1: normal, 2: good
+  String? get comment;
   @override
-  DateTime get date;
-  @override
-  @TimestampConverter()
-  DateTime? get createdAt;
+  int get date;
   @override
   @JsonKey(ignore: true)
   _$$MoodImplCopyWith<_$MoodImpl> get copyWith =>
