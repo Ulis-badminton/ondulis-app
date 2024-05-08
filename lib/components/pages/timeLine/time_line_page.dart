@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ondulis_app/components/molecules/container/thread_card.dart';
 import 'package:ondulis_app/components/organisms/header/appbar_with_icon.dart';
+import 'package:ondulis_app/components/pages/home.dart';
 import 'package:ondulis_app/components/pages/profile/prpfile_change_page.dart';
 import 'package:ondulis_app/repository/mood_provider.dart';
 import 'package:ondulis_app/repository/user_provider.dart';
@@ -29,7 +30,11 @@ class TimeLinePage extends ConsumerWidget {
           );
         },
         onBackPressed: () {
-          Navigator.pop(context);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+            ),
+          );
         },
       ),
       body: todayMoods == null
