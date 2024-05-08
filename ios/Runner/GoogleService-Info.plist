@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCmfN-m54oVRxLd__-u_UrYa1m5yHo5eAU</string>
+	<string>AIzaSyAfpH54d4LZTwjD9JuH4XB17_f5pDyzGVM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>142503057564</string>
+	<string>77480142893</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>jp.akaushi.ondulis</string>
+	<string>com.example.ondulisApp</string>
 	<key>PROJECT_ID</key>
-	<string>ondulis-app-dev</string>
+	<string>andu-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ondulis-app-dev.appspot.com</string>
+	<string>andu-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:142503057564:ios:08e2eab689d30bff0bb559</string>
+	<string>1:77480142893:ios:592f5fe2db454acac7f0a4</string>
 </dict>
 </plist>

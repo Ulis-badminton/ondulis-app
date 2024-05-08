@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "prod": "and-u-prod",
+    "dev": "andu-dev",
+    "default": "andu-dev"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

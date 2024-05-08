@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,21 +46,30 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAThkAoL7DTcexh0mHIRt1O8sxp6aGZhPk',
+    appId: '1:77480142893:web:6c0618961af112e6c7f0a4',
+    messagingSenderId: '77480142893',
+    projectId: 'andu-dev',
+    authDomain: 'andu-dev.firebaseapp.com',
+    storageBucket: 'andu-dev.appspot.com',
+    measurementId: 'G-B2K7S12HRX',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAHwT7xIJ6-uLIx-QqtN7iZA3xEHCTr-M0',
-    appId: '1:142503057564:android:24b931070432f3af0bb559',
-    messagingSenderId: '142503057564',
-    projectId: 'ondulis-app-dev',
-    storageBucket: 'ondulis-app-dev.appspot.com',
+    apiKey: 'AIzaSyAU4c8oFDIeLNd8Edci8RDpf8xiBautgpA',
+    appId: '1:77480142893:android:604d79eedfdcd9e6c7f0a4',
+    messagingSenderId: '77480142893',
+    projectId: 'andu-dev',
+    storageBucket: 'andu-dev.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCmfN-m54oVRxLd__-u_UrYa1m5yHo5eAU',
-    appId: '1:142503057564:ios:08e2eab689d30bff0bb559',
-    messagingSenderId: '142503057564',
-    projectId: 'ondulis-app-dev',
-    storageBucket: 'ondulis-app-dev.appspot.com',
-    iosBundleId: 'jp.akaushi.ondulis',
+    apiKey: 'AIzaSyAfpH54d4LZTwjD9JuH4XB17_f5pDyzGVM',
+    appId: '1:77480142893:ios:592f5fe2db454acac7f0a4',
+    messagingSenderId: '77480142893',
+    projectId: 'andu-dev',
+    storageBucket: 'andu-dev.appspot.com',
+    iosBundleId: 'com.example.ondulisApp',
   );
-
 }

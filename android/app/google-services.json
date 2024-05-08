@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "142503057564",
-    "project_id": "ondulis-app-dev",
-    "storage_bucket": "ondulis-app-dev.appspot.com"
+    "project_number": "77480142893",
+    "project_id": "andu-dev",
+    "storage_bucket": "andu-dev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:142503057564:android:24b931070432f3af0bb559",
+        "mobilesdk_app_id": "1:77480142893:android:604d79eedfdcd9e6c7f0a4",
         "android_client_info": {
           "package_name": "co.appbrewery.flash_chat"
         }
@@ -15,26 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAHwT7xIJ6-uLIx-QqtN7iZA3xEHCTr-M0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:142503057564:android:33335761c5fd0f990bb559",
-        "android_client_info": {
-          "package_name": "jp.akaushi.ondulis_app.dev"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAHwT7xIJ6-uLIx-QqtN7iZA3xEHCTr-M0"
+          "current_key": "AIzaSyAU4c8oFDIeLNd8Edci8RDpf8xiBautgpA"
         }
       ],
       "services": {

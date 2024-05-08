@@ -1,1 +1,49 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"ondulis-app-dev","appId":"1:142503057564:android:24b931070432f3af0bb559","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"ondulis-app-dev","appId":"1:142503057564:ios:08e2eab689d30bff0bb559","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"ondulis-app-dev","configurations":{"android":"1:142503057564:android:24b931070432f3af0bb559","ios":"1:142503057564:ios:08e2eab689d30bff0bb559"}},"lib/firebase_options_dev.dart":{"projectId":"ondulis-app-dev","configurations":{"android":"1:142503057564:android:33335761c5fd0f990bb559","ios":"1:142503057564:ios:fdc58dccb04262480bb559"}},"lib/firebase_options_prod.dart":{"projectId":"ondulis-app-prod","configurations":{"android":"1:908775029903:android:657aa5048ec5164b07c4fa","ios":"1:908775029903:ios:a26a0c193927d49407c4fa"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "andu-dev",
+          "appId": "1:77480142893:android:604d79eedfdcd9e6c7f0a4",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "andu-dev",
+          "appId": "1:77480142893:ios:592f5fe2db454acac7f0a4",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "andu-dev",
+          "configurations": {
+            "android": "1:77480142893:android:604d79eedfdcd9e6c7f0a4",
+            "ios": "1:77480142893:ios:592f5fe2db454acac7f0a4",
+            "web": "1:77480142893:web:6c0618961af112e6c7f0a4"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "asia-east1"
+    }
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}
