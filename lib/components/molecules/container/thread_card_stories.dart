@@ -4,7 +4,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:ondulis_app/components/molecules/container/thread_card.dart';
 
 
-final mockUser = UserModel(
+final mockUser = const UserModel(
   email: 'example.com',
   authId: 'abc',
   displayName: '名前',
@@ -16,7 +16,7 @@ final mockUser = UserModel(
   type: ThreadCard,
 )
 ThreadCard threadCard(BuildContext context) {
-  return ThreadCard(
+  return const ThreadCard(
     authId: 'abc',
     comment: '今日はいい気分です',
     mood: 1,

@@ -90,8 +90,6 @@ class AuthPage extends ConsumerWidget{
                       }
                     }
                   }
-                  debugPrint('ログインが完了しました');
-                  debugPrint('${FirebaseAuth.instance.currentUser?.uid}');
                 },
                 child: const Text('ログイン'),
               ),
@@ -118,7 +116,6 @@ class AuthPage extends ConsumerWidget{
                       }
                     }
                   }
-                  debugPrint('新規登録が完了しました');
                 },
                 child: const Text('新規登録'),
               ),

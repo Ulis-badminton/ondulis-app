@@ -4,7 +4,7 @@ import 'package:ondulis_app/components/molecules/container/thread_card.dart';
 class ThreadList extends StatelessWidget {
   final List<ThreadCard> threads;
 
-  ThreadList({required this.threads});
+  const ThreadList({super.key, required this.threads});
 
   @override
   Widget build(BuildContext context) {

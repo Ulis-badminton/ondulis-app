@@ -67,6 +67,17 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   json_serializable: ^6.8.0
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/u.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/images/u.png"
+    background_color: "#FFFFFF"
+    theme_color: "#00FFFF"
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -85,6 +96,7 @@ flutter:
     - assets/images/bad_mood.svg
     - assets/images/normal_mood.svg
     - assets/images/good_mood.svg
+    - assets/images/u.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

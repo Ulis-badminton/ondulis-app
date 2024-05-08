@@ -15,9 +15,6 @@ class TimeLinePage extends ConsumerWidget {
     final user = ref.watch(userProvider).value;
     final todayMoods = ref.watch(todayMoodsProvider).value;
 
-    debugPrint('todayMoodsですよ: $todayMoods');
-    debugPrint('user: ${user?.displayName}');
-
     return Scaffold(
       appBar: AppBarWithIcon(
         title: 'タイムライン',
@@ -50,6 +47,6 @@ class TimeLinePage extends ConsumerWidget {
                 );
               },
             ),
-    );
-  }
+          );
+        }
 }

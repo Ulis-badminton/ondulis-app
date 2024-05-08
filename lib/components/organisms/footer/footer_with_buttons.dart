@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class FooterWithButtons extends StatelessWidget {
   final Text leftButtonText;
@@ -32,7 +33,7 @@ class FooterWithButtons extends StatelessWidget {
               child: leftButtonText,
             ),
           ),
-          SizedBox(width: 16.0),
+          const Gap(16.0),
           Expanded(
             child: ElevatedButton(
               onPressed: rightButtonOnPress,
