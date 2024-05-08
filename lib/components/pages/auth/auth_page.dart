@@ -6,7 +6,9 @@ import 'package:ondulis_app/components/molecules/textform/customTextFormField.da
 import 'package:ondulis_app/components/organisms/header/custom_appbar.dart';
 import 'package:ondulis_app/components/pages/home.dart';
 import 'package:ondulis_app/components/pages/profile/profile_page.dart';
+import 'package:ondulis_app/components/pages/timeLine/time_line_page.dart';
 import 'package:ondulis_app/repository/auth_service.dart';
+import 'package:ondulis_app/repository/mood_service.dart';
 
 
 class AuthPage extends ConsumerWidget{
@@ -61,10 +63,17 @@ class AuthPage extends ConsumerWidget{
                         newUserEmail.text,
                         newUserPassword.text,
                       );
-                      Navigator.pushReplacement(
+                      if (MoodService().isMoodRegisteredToday() == false){
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        );
+                      } else {
+                        Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                  );
+                      MaterialPageRoute(builder: (context) => const TimeLinePage()),
+                        );
+                      }
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
                         ScaffoldMessenger.of(context).showSnackBar(
