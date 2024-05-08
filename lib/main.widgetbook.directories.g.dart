@@ -9,24 +9,45 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:ondulis_app/components/molecules/container/thread_card_stories.dart'
+import 'package:ondulis_app/components/atoms/button/svg_button_stories.dart'
     as _i2;
-import 'package:ondulis_app/components/molecules/textform/customTextFormField_stories.dart'
+import 'package:ondulis_app/components/molecules/container/thread_card_stories.dart'
     as _i3;
-import 'package:ondulis_app/components/organisms/footer/footer_with_buttons_stories.dart'
+import 'package:ondulis_app/components/molecules/selector/mood_selector_stories.dart'
     as _i4;
-import 'package:ondulis_app/components/organisms/header/appbar_with_icon_stories.dart'
+import 'package:ondulis_app/components/molecules/textform/customTextFormField_stories.dart'
     as _i5;
-import 'package:ondulis_app/components/organisms/header/custom_appbar_stories.dart'
+import 'package:ondulis_app/components/organisms/footer/footer_with_buttons_stories.dart'
     as _i6;
-import 'package:ondulis_app/components/organisms/widgetList/thread_list_stories.dart'
+import 'package:ondulis_app/components/organisms/header/appbar_with_icon_stories.dart'
     as _i7;
+import 'package:ondulis_app/components/organisms/header/custom_appbar_stories.dart'
+    as _i8;
+import 'package:ondulis_app/components/organisms/widgetList/thread_list_stories.dart'
+    as _i9;
 import 'package:widgetbook/widgetbook.dart' as _i1;
 
 final directories = <_i1.WidgetbookNode>[
   _i1.WidgetbookFolder(
     name: 'components',
     children: [
+      _i1.WidgetbookFolder(
+        name: 'atoms',
+        children: [
+          _i1.WidgetbookFolder(
+            name: 'button',
+            children: [
+              _i1.WidgetbookLeafComponent(
+                name: 'SvgButton',
+                useCase: _i1.WidgetbookUseCase(
+                  name: 'SvgButton',
+                  builder: _i2.svgButton,
+                ),
+              )
+            ],
+          )
+        ],
+      ),
       _i1.WidgetbookFolder(
         name: 'molecules',
         children: [
@@ -37,7 +58,19 @@ final directories = <_i1.WidgetbookNode>[
                 name: 'ThreadCard',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'ThreadCard',
-                  builder: _i2.threadCard,
+                  builder: _i3.threadCard,
+                ),
+              )
+            ],
+          ),
+          _i1.WidgetbookFolder(
+            name: 'selector',
+            children: [
+              _i1.WidgetbookLeafComponent(
+                name: 'MoodSelector',
+                useCase: _i1.WidgetbookUseCase(
+                  name: 'MoodSelector',
+                  builder: _i4.moodSelector,
                 ),
               )
             ],
@@ -49,7 +82,7 @@ final directories = <_i1.WidgetbookNode>[
                 name: 'CustomTextFormField',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'CustomTextFormField',
-                  builder: _i3.customTextField,
+                  builder: _i5.customTextField,
                 ),
               )
             ],
@@ -66,7 +99,7 @@ final directories = <_i1.WidgetbookNode>[
                 name: 'FooterWithButtons',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'FooterWithButtons',
-                  builder: _i4.footerWithButtons,
+                  builder: _i6.footerWithButtons,
                 ),
               )
             ],
@@ -78,14 +111,14 @@ final directories = <_i1.WidgetbookNode>[
                 name: 'AppBarWithIcon',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'AppBarWithIcon',
-                  builder: _i5.appBarWithIcon,
+                  builder: _i7.appBarWithIcon,
                 ),
               ),
               _i1.WidgetbookLeafComponent(
                 name: 'CustomAppBar',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'CustomAppbar',
-                  builder: _i6.customAppBar,
+                  builder: _i8.customAppBar,
                 ),
               ),
             ],
@@ -97,7 +130,7 @@ final directories = <_i1.WidgetbookNode>[
                 name: 'ThreadList',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'ThreadList',
-                  builder: _i7.threadList,
+                  builder: _i9.threadList,
                 ),
               )
             ],
