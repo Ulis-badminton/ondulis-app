@@ -34,7 +34,6 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-
     final isMoodRegistered = ref.watch(isMoodRegisteredTodayProvider);
     ref.read(isMoodRegisteredTodayProvider.notifier).checkIsMoodRegisteredToday(currentUser!.uid);
 
@@ -42,7 +41,6 @@ class HomePage extends ConsumerWidget {
 
     final user = ref.watch(userProvider).value;
     final userComment = TextEditingController(text: initMoodComment);
-
 
     return Scaffold(
       appBar: AppBarWithIcon(
@@ -68,16 +66,19 @@ class HomePage extends ConsumerWidget {
                 MoodService().addMood(0, MoodService().convertDateTimeToInt(DateTime.now()));
                 ref.read(isMoodRegisteredTodayProvider.notifier)
                   .checkIsMoodRegisteredToday(currentUser!.uid);
+                ref.read(isSelectedMoodProvider.notifier).state = 0;
               },
               onNormalMoodPressed: () {
                 MoodService().addMood(1, MoodService().convertDateTimeToInt(DateTime.now()));
                 ref.read(isMoodRegisteredTodayProvider.notifier)
                   .checkIsMoodRegisteredToday(currentUser!.uid);
+                ref.read(isSelectedMoodProvider.notifier).state = 1;
               },
               onGoodMoodPressed: () {
                 MoodService().addMood(2, MoodService().convertDateTimeToInt(DateTime.now()));
                 ref.read(isMoodRegisteredTodayProvider.notifier)
                   .checkIsMoodRegisteredToday(currentUser!.uid);
+                ref.read(isSelectedMoodProvider.notifier).state = 2;
               },
             ),
             const Gap(20),

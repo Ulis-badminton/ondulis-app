@@ -5,12 +5,16 @@ class SvgButton extends StatelessWidget {
   final String svgAssetPath;
   final VoidCallback onPressed;
   final double size;
+  final bool isSelected;
+  final Color? color;
 
   const SvgButton({
     Key? key,
     required this.svgAssetPath,
     required this.onPressed,
     this.size = 48.0,
+    this.isSelected = false,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -23,6 +27,12 @@ class SvgButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
           padding: EdgeInsets.zero,
+          side: isSelected
+              ? BorderSide(
+                  color: color ?? Colors.blue,
+                  width: 2.0,
+                )
+              : null,
         ),
         child: SvgPicture.asset(
           svgAssetPath,
