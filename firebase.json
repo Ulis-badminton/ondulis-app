@@ -33,8 +33,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "web",
-    "site" : "and-u-dev",
+    "source": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
