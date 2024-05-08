@@ -3,14 +3,14 @@
     "platforms": {
       "android": {
         "default": {
-          "projectId": "andu-dev",
+          "projectId": "and-u-dev",
           "appId": "1:77480142893:android:604d79eedfdcd9e6c7f0a4",
           "fileOutput": "android/app/google-services.json"
         }
       },
       "ios": {
         "default": {
-          "projectId": "andu-dev",
+          "projectId": "and-u-dev",
           "appId": "1:77480142893:ios:592f5fe2db454acac7f0a4",
           "uploadDebugSymbols": false,
           "fileOutput": "ios/Runner/GoogleService-Info.plist"
@@ -18,7 +18,7 @@
       },
       "dart": {
         "lib/firebase_options.dart": {
-          "projectId": "andu-dev",
+          "projectId": "and-u-dev",
           "configurations": {
             "android": "1:77480142893:android:604d79eedfdcd9e6c7f0a4",
             "ios": "1:77480142893:ios:592f5fe2db454acac7f0a4",
@@ -33,7 +33,8 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "source": ".",
+    "public": "web",
+    "site" : "and-u-dev",
     "ignore": [
       "firebase.json",
       "**/.*",
