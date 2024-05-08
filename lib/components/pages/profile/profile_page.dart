@@ -9,10 +9,9 @@ import 'package:ondulis_app/repository/user_service.dart';
 
 final _auth = FirebaseAuth.instance;
 
-
 class ProfilePage extends ConsumerWidget{
 
-    const ProfilePage({Key? key}) : super(key: key);
+    const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

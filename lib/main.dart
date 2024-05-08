@@ -22,6 +22,31 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "AND'U",
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+          if (snapshot.hasData) {
+            return HomePage();
+          }
+          return AuthPage();
+        },
+      ),
+    );
+  }
   // @override
   // Widget build(BuildContext context) {
   //   return MaterialApp(
@@ -29,32 +54,7 @@ class MyApp extends StatelessWidget {
   //     theme: ThemeData(
   //       primarySwatch: Colors.blue,
   //     ),
-  //     home: StreamBuilder<User?>(
-  //       stream: FirebaseAuth.instance.authStateChanges(),
-  //       builder: (context, snapshot) {
-  //         if (snapshot.connectionState == ConnectionState.waiting) {
-  //           return const Scaffold(
-  //             body: Center(
-  //               child: CircularProgressIndicator(),
-  //             ),
-  //           );
-  //         }
-  //         if (snapshot.hasData) {
-  //           return const HomePage();
-  //         }
-  //         return AuthPage();
-  //       },
-  //     ),
+  //     home: AuthPage(),
   //   );
   // }
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Your App Name',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: AuthPage(),
-    );
-  }
 }

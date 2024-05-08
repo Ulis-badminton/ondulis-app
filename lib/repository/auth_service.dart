@@ -34,7 +34,6 @@ class AuthService {
   }
 
   Future<void> signOut() async {
-    // Firestoreの該当ユーザーのドキュメントを削除
     await _auth.signOut();
   }
 

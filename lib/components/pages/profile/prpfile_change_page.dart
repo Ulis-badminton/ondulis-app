@@ -13,7 +13,7 @@ final _auth = FirebaseAuth.instance;
 
 class ProfileChangePage extends ConsumerWidget{
 
-    const ProfileChangePage({Key? key}) : super(key: key);
+    const ProfileChangePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

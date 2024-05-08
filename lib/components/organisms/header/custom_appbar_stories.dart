@@ -3,7 +3,7 @@ import 'package:ondulis_app/components/organisms/header/custom_appbar.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(
-  name: 'CustomAppbar',
+  name: 'CustomAppBar',
   type: CustomAppBar,
 )
 CustomAppBar customAppBar(BuildContext context) {
