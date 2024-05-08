@@ -24,3 +24,5 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANDU_DEV }}
           channelId: live
           projectId: andu-dev
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
