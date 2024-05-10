@@ -45,7 +45,7 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBarWithIcon(
         title: 'ホーム',
-        imagePath: user?.profileImageURL ?? '',
+        // imagePath: user?.profileImageURL ?? '',
         onIconPressed: () {
           // ProfilePageに遷移する
           Navigator.of(context).push(
