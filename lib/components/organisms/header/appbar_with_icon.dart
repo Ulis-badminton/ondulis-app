@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class AppBarWithIcon extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final String imagePath;
+  // final String imagePath;
   final VoidCallback onIconPressed;
   final VoidCallback? onBackPressed; // バックボタンのコールバック
 
   const AppBarWithIcon({
     super.key,
     required this.title,
-    required this.imagePath,
+    // required this.imagePath,
     required this.onIconPressed,
     this.onBackPressed, // バックボタンのコールバックを受け取るように変更
   });
@@ -30,11 +30,12 @@ class AppBarWithIcon extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         InkWell(
           onTap: onIconPressed,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(imagePath),
-            ),
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            // child: CircleAvatar(
+            //   backgroundImage: NetworkImage(imagePath),
+            // ),
+            child: Icon(Icons.menu),
           ),
         ),
       ],

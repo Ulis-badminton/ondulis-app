@@ -18,7 +18,7 @@ class TimeLinePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBarWithIcon(
         title: 'タイムライン',
-        imagePath: user?.profileImageURL ?? '',
+        // imagePath: user?.profileImageURL ?? '',
         onIconPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(

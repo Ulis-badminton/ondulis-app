@@ -19,7 +19,7 @@ class ProfileChangePage extends ConsumerWidget{
   Widget build(BuildContext context, WidgetRef ref) {
     
     // final displayNameController = TextEditingController();
-    final profileImagePath = ref.watch(profileImagePathProvider);
+    // final profileImagePath = ref.watch(profileImagePathProvider);
 
     final dataService = ref.read(userServiceProvider.notifier).state;
     final displayNameController = TextEditingController(text: ref.watch(userProvider).value?.displayName ?? '');
@@ -32,7 +32,7 @@ class ProfileChangePage extends ConsumerWidget{
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const CustomImagePicker(),
+            // const CustomImagePicker(),
             const Gap(20),
             CustomTextFormField(
               controller: displayNameController,
@@ -45,11 +45,13 @@ class ProfileChangePage extends ConsumerWidget{
                 if (userId != null) {
                   final email = _auth.currentUser?.email ?? '';
                   final displayNameText = displayNameController.text;
-                  final photoUrl = profileImagePath;
+                  // final photoUrl = profileImagePath;
 
-                  if (displayNameText.isNotEmpty && photoUrl.isNotEmpty) {
+                  // if (displayNameText.isNotEmpty && photoUrl.isNotEmpty) {
+                  if (displayNameText.isNotEmpty) {
                     try {
-                      await dataService.addUser(email, displayNameText, photoUrl);
+                      // await dataService.addUser(email, displayNameText, photoUrl);
+                      await dataService.addUser(email, displayNameText, '');
                         Navigator.pop(context);
                     } catch (e) {
                       debugPrint('Error adding user: $e');
@@ -59,7 +61,8 @@ class ProfileChangePage extends ConsumerWidget{
                       context: context,
                       builder: (context) => AlertDialog(
                         title: const Text('入力エラー'),
-                        content: const Text('アカウント名と写真は必須です'),
+                        // content: const Text('アカウント名と写真は必須です'),
+                        content: const Text('アカウント名は必須です'),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
