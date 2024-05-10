@@ -45,7 +45,7 @@ class ThreadCard extends StatelessWidget {
         } else {
           final user = snapshot.data!;
           final accountName = user.displayName;
-          final profileImagePath = user.profileImageURL;
+          // final profileImagePath = user.profileImageURL;
 
           return Container(
             width: MediaQuery.of(context).size.width,
@@ -56,10 +56,10 @@ class ThreadCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                CircleAvatar(
-                  backgroundColor: iconColor,
-                  backgroundImage: NetworkImage(profileImagePath),
-                ),
+                // CircleAvatar(
+                //   backgroundColor: iconColor,
+                //   backgroundImage: NetworkImage(profileImagePath),
+                // ),
                 const Gap(16.0),
                 Expanded(
                   child: Column(

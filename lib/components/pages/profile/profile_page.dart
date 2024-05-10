@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:ondulis_app/components/atoms/imagePicker/custom_image_picker.dart';
+// import 'package:ondulis_app/components/atoms/imagePicker/custom_image_picker.dart';
 import 'package:ondulis_app/components/molecules/textform/customTextFormField.dart';
 import 'package:ondulis_app/components/pages/home.dart';
 import 'package:ondulis_app/repository/user_service.dart';
@@ -17,7 +17,7 @@ class ProfilePage extends ConsumerWidget{
   Widget build(BuildContext context, WidgetRef ref) {
     
     final displayNameController = TextEditingController();
-    final profileImagePath = ref.watch(profileImagePathProvider);
+    // final profileImagePath = ref.watch(profileImagePathProvider);
 
     final dataService = ref.read(userServiceProvider.notifier).state;
 
@@ -29,7 +29,7 @@ class ProfilePage extends ConsumerWidget{
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const CustomImagePicker(),
+            // const CustomImagePicker(),
             const Gap(20),
             CustomTextFormField(
               labelText: 'アカウント名',
@@ -42,11 +42,13 @@ class ProfilePage extends ConsumerWidget{
                 if (userId != null) {
                   final email = _auth.currentUser?.email ?? '';
                   final displayNameText = displayNameController.text;
-                  final photoUrl = profileImagePath;
+                  // final photoUrl = profileImagePath;
 
-                  if (displayNameText.isNotEmpty && photoUrl.isNotEmpty) {
+                  // if (displayNameText.isNotEmpty && photoUrl.isNotEmpty) {
+                  if (displayNameText.isNotEmpty) {
                     try {
-                      await dataService.addUser(email, displayNameText, photoUrl);
+                      // await dataService.addUser(email, displayNameText, photoUrl);
+                      await dataService.addUser(email, displayNameText, '');
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => HomePage()),
@@ -59,7 +61,8 @@ class ProfilePage extends ConsumerWidget{
                       context: context,
                       builder: (context) => AlertDialog(
                         title: const Text('入力エラー'),
-                        content: const Text('アカウント名と写真は必須です'),
+                        // content: const Text('アカウント名と写真は必須です'),
+                        content: const Text('アカウント名は必須です'),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
