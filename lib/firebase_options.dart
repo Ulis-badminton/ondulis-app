@@ -17,7 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      return webConfig;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,13 +46,44 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
+  // static const FirebaseOptions web = FirebaseOptions(
+  //   apiKey: 'AIzaSyAThkAoL7DTcexh0mHIRt1O8sxp6aGZhPk',
+  //   appId: '1:77480142893:web:6c0618961af112e6c7f0a4',
+  //   messagingSenderId: '77480142893',
+  //   projectId: 'andu-dev',
+  //   authDomain: 'andu-dev.firebaseapp.com',
+  //   storageBucket: 'andu-dev.appspot.com',
+  //   measurementId: 'G-B2K7S12HRX',
+  // );
+    static FirebaseOptions get webConfig {
+    const flavorName = String.fromEnvironment("FLAVOR");
+    switch (flavorName) {
+      case 'dev':
+        return devWebConfig;
+      case 'prod':
+        return prodWebConfig;
+      default:
+        return devWebConfig;
+    }
+  }
+
+  static const FirebaseOptions devWebConfig = FirebaseOptions(
     apiKey: 'AIzaSyAThkAoL7DTcexh0mHIRt1O8sxp6aGZhPk',
     appId: '1:77480142893:web:6c0618961af112e6c7f0a4',
     messagingSenderId: '77480142893',
     projectId: 'andu-dev',
     authDomain: 'andu-dev.firebaseapp.com',
     storageBucket: 'andu-dev.appspot.com',
+    measurementId: 'G-B2K7S12HRX',
+  );
+
+  static const FirebaseOptions prodWebConfig = FirebaseOptions(
+    apiKey: 'AIzaSyBi6kSgp4Q_evtlAgkMAFoCdAq8GN2_1Jk',
+    appId: '1:77480142893:web:6c0618961af112e6c7f0a4',
+    messagingSenderId: '77480142893',
+    projectId: "AND'U-prod",
+    authDomain: 'and-u-prod.firebaseapp.com',
+    storageBucket: 'and-u-prod.appspot.com',
     measurementId: 'G-B2K7S12HRX',
   );
 
